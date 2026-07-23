@@ -16,7 +16,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "django-insecure--=6n=@=*r-m_cv09*87zc0p^&&ppxhjpe5f+(^b^h!cbwry%-o")
 DEBUG = os.environ.get("DJANGO_DEBUG", "1") == "1"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -73,17 +73,17 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 # Database
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.environ.get("POSTGRES_DB", "ticketbooking"),
-        "USER": os.environ.get("POSTGRES_USER", "ticketbooking_user"),
-        "PASSWORD": os.environ.get("POSTGRES_PASSWORD", "changeme"),
-        "HOST": os.environ.get("POSTGRES_HOST", "localhost"),
-        "PORT": os.environ.get("POSTGRES_PORT", "5432"),
-    }
-}
+import dj_database_url
 
+DATABASES = {
+    "default": dj_database_url.config(
+        default=f"postgresql://{os.environ.get('POSTGRES_USER', 'ticketbooking_user')}:"
+                f"{os.environ.get('POSTGRES_PASSWORD', 'changeme')}@"
+                f"{os.environ.get('POSTGRES_HOST', 'localhost')}:"
+                f"{os.environ.get('POSTGRES_PORT', '5432')}/"
+                f"{os.environ.get('POSTGRES_DB', 'ticketbooking')}"
+    )
+}
 AUTH_USER_MODEL = "accounts.User"
 
 AUTH_PASSWORD_VALIDATORS = [
