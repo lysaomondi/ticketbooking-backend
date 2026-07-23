@@ -50,7 +50,7 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
 "http://localhost:5173",
-"https://ticketbooking-frontend.vercel.app/"
+"https://ticketbooking-frontend.vercel.app"
 ]
 
 ROOT_URLCONF = "config.urls"
