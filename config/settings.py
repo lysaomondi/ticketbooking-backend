@@ -23,17 +23,15 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
-
-    # Cloudinary
-    "cloudinary_storage",
     "django.contrib.staticfiles",
-    "cloudinary",
 
     # Third-party apps
     "rest_framework",
     "rest_framework_simplejwt",
     "drf_spectacular",
     "corsheaders",
+    "cloudinary",
+ 
 
     # Local apps
     "accounts",
