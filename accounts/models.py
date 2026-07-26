@@ -7,11 +7,10 @@ class UserManager(BaseUserManager):
         if not email:
             raise ValueError("Users must have an email address")
         email = self.normalize_email(email)
-        user =self.model(email=email, **extra_fields)
+        user = self.model(email=email, **extra_fields)
         user.set_password(password)
         user.save()
         return user
-
 
     def create_superuser(self, email, password=None, **extra_fields):
         extra_fields.setdefault("is_staff", True)
@@ -22,10 +21,10 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     ROLE_CHOICES = [
-        ("CUSTOMER", "Customer"),
-        ("ORGANIZER", "Organizer"),
-        ("ADMIN", "Admin"),
-]
+        ("customer", "Customer"),
+        ("organizer", "Organizer"),
+        ("admin", "Admin"),
+    ]
 
     email = models.EmailField(unique=True)
     name = models.CharField(max_length=100, blank=True)
