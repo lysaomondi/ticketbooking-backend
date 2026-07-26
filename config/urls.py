@@ -1,8 +1,13 @@
+
 from django.contrib import admin
 from django.urls import path, include
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from django.conf import settings
 from django.conf.urls.static import static
+
+admin.site.site_header = "Ticketbooking Administration"
+admin.site.site_title = "Ticketbooking Admin"
+admin.site.index_title = "Welcome to Ticketbooking Administration"
 
 urlpatterns = [
     path("admin/", admin.site.urls),
